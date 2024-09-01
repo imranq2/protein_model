@@ -25,13 +25,17 @@ model: ESM3InferenceClient = ESM3.from_pretrained("esm3_sm_open_v1").to(device)
 
 # Example protein sequence
 # sequence = "MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAN___"
-sequence = "___________________________________________________DQATSLRILNNGHAFNVEFDDSQDKAVLKGGPLDGTYRLIQFHFHWGSLDGQGSEHTVDKKKYAAELHLVHWNTKYGDFGKAVQQPDGLAVLGIFLKVGSAKPGLQKVVDVLDSIKTKGKSADFTNFDPRGLLPESLDYWTYPGSLTTPP___________________________________________________________"
+sequence = "___________________________________________________DQATSLRILNNGHAFGSLTTPP___________________________________________________________"
 
 # Create an ESMProtein object with the sequence
 protein = ESMProtein(sequence=sequence)
 
 # Generate the sequence prediction (optional, if needed)
 protein = model.generate(protein, GenerationConfig(track="sequence", num_steps=8, temperature=0.7))
+# Print out the predicted sequence
+predicted_sequence = protein.sequence
+print("Predicted Sequence:")
+print(predicted_sequence)
 
 # Generate the secondary structure prediction
 protein = model.generate(protein, GenerationConfig(track="structure", num_steps=8))
