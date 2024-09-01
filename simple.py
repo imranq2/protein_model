@@ -25,7 +25,8 @@ model: ESM3InferenceClient = ESM3.from_pretrained("esm3_sm_open_v1").to(device)
 
 # Example protein sequence
 # sequence = "MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAN___"
-sequence = "___________________________________________________DQATSLRILNNGHAFGSLTTPP___________________________________________________________"
+# sequence = "___________________________________________________DQATSLRILNNGHAFGSLTTPP___________________________________________________________"
+sequence = "___DQA___"
 
 # Create an ESMProtein object with the sequence
 protein = ESMProtein(sequence=sequence)
