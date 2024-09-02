@@ -3,3 +3,5 @@ torch
 torchvision
 torchaudio
 esm
+# Uncomment the following line to use the local version of ESM
+# -e ../esm

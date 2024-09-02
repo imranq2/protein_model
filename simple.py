@@ -15,13 +15,26 @@ else:
     # Prompt the user to log in if no token is found
     login()
 
+# Check that MPS is available
+if not torch.backends.mps.is_available():
+    if not torch.backends.mps.is_built():
+        print("MPS not available because the current PyTorch install was not "
+              "built with MPS enabled.")
+    else:
+        print("MPS not available because the current MacOS version is not 12.3+ "
+              "and/or you do not have an MPS-enabled device on this machine.")
+
 # Set the device to MPS (for Mac M1/M2) or CPU
-# device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-device = "cpu"
+device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+# device = "cpu"
 print(f"device: {device}")
 
 # Load the ESM 3.0.4 model
 model: ESM3InferenceClient = ESM3.from_pretrained("esm3_sm_open_v1").to(device)
+
+# Check if the model is on MPS
+model_device = next(model.parameters()).device
+print(f"Model is running on device: {model_device}")
 
 # Example protein sequence
 # sequence = "MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAN___"
