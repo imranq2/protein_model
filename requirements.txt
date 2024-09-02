@@ -2,6 +2,8 @@
 torch
 torchvision
 torchaudio
-esm
+# esm
+# Uncomment the following line to use the ESM with fix for Mac Silicon
+git+https://github.com/imranq2/esm.git@fix-for-mac-silicon#egg=esm
 # Uncomment the following line to use the local version of ESM
 # -e ../esm
