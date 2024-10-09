@@ -55,13 +55,13 @@ print(predicted_sequence)
 protein = model.generate(protein, GenerationConfig(track="structure", num_steps=8))
 
 # Save the predicted structure to a PDB file
-protein.to_pdb("./predicted_structure.pdb")
+protein.to_pdb("/data/predicted_structure.pdb")
 
 # Optionally, perform a round-trip design by inverse folding the sequence and recomputing the structure
 protein.sequence = None
 protein = model.generate(protein, GenerationConfig(track="sequence", num_steps=8))
 protein.coordinates = None
 protein = model.generate(protein, GenerationConfig(track="structure", num_steps=8))
-protein.to_pdb("./round_tripped_structure.pdb")
+protein.to_pdb("/data/round_tripped_structure.pdb")
 
 print("Secondary structure prediction complete. PDB files saved.")

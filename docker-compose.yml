@@ -5,8 +5,12 @@ services:
     build: .
     ports:
       - "80:80"
+    env_file:
+      - docker.env
     environment:
       - HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}
+      - PYTORCH_ENABLE_MPS_FALLBACK=1
     volumes:
       - .:/app
+      - ./data:/data
     command: pipenv run python simple.py
