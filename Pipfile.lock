@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "672e9ced168158496242e87a74417c623c7016541cedf7d03186d990e10fe023"
+            "sha256": "dbac20858e66584542bf2bed560afd1cfa2e97f41bc2efecc9419b4d2fb9ff5d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -314,9 +314,11 @@
             "version": "==0.8.0"
         },
         "esm": {
-            "git": "https://github.com/imranq2/esm.git",
+            "hashes": [
+                "sha256:9a9228ddb77139983609af31428e13f4fb8b25f1c757e914810bc229e66b15b9"
+            ],
             "markers": "python_version >= '3.10'",
-            "ref": "ff009b21cf75e733c51816161465054c821dcff8"
+            "version": "==3.0.5"
         },
         "executing": {
             "hashes": [
@@ -1153,6 +1155,14 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==1.13.3"
+        },
+        "tenacity": {
+            "hashes": [
+                "sha256:807f37ca97d62aa361264d497b0e31e92b8027044942bfa756160d908320d73b",
+                "sha256:93de0c98785b27fcf659856aa9f54bfbd399e29969b0621bc7f762bd441b4539"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==9.0.0"
         },
         "threadpoolctl": {
             "hashes": [
