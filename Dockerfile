@@ -14,12 +14,14 @@ RUN python -m pip install --upgrade setuptools wheel pipenv
 
 # RUN apt-get install python3-wheel-whl python3-setuptools-whl python3-pip-whl
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+COPY Pipfile* /app/
 
-RUN pipenv lock --dev
+# RUN pipenv lock --dev
 # Install any needed packages specified in Pipfile
 RUN pipenv sync --dev --system --extra-pip-args="--prefer-binary"
+
+# Copy the current directory contents into the container at /app
+COPY . /app
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
