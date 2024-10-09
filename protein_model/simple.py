@@ -5,13 +5,17 @@ from esm.sdk.api import ESM3InferenceClient, ESMProtein, GenerationConfig
 import torch
 
 # Check if the Hugging Face API token is available in the environment
-token = os.getenv("HUGGINGFACE_TOKEN")
+token = os.getenv("HF_API_TOKEN")
 
 if token:
     # Use the existing token
-    api = HfApi(token=token)
     print("Using existing Hugging Face token.")
+    print(f"token: {token}")
+    # Use your Hugging Face token here
+    login(token="your_huggingface_token", add_to_git_credential=True)
+    api = HfApi(token=token)
 else:
+    print("No token found so trying to login")
     # Prompt the user to log in if no token is found
     login()
 

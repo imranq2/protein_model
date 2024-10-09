@@ -10,7 +10,9 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
 RUN apt-get update && apt-get install -y git gcc g++
 
 RUN python -m ensurepip --upgrade
-RUN python -m pip install --upgrade setuptools wheel pipenv
+RUN python -m pip install --upgrade setuptools wheel pipenv huggingface_hub
+
+# RUN huggingface-cli login --token $HUGGINGFACE_TOKEN
 
 # RUN apt-get install python3-wheel-whl python3-setuptools-whl python3-pip-whl
 
