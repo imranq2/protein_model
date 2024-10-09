@@ -21,7 +21,9 @@ COPY Pipfile* /app/
 RUN pipenv sync --dev --system --extra-pip-args="--prefer-binary"
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY protein_model /app/protein_model
+
+WORKDIR /app/protein_model
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
