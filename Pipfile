@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[packages]
+setuptools="==75.1.0"
+wheel="==0.44.0"
+torch = "==2.4.1"
+torchvision = "==0.19.1"
+torchaudio = "==2.4.1"
+biotite = "==0.41.2"
+esm = {git = "https://github.com/imranq2/esm.git", ref = "fix-for-mac-silicon"}
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
