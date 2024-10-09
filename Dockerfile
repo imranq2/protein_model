@@ -29,6 +29,7 @@ WORKDIR /app/protein_model
 
 RUN git config --global credential.helper store
 
+# RUN python3 simple.py
 # Make port 80 available to the world outside this container
 EXPOSE 80
 

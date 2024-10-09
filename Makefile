@@ -21,7 +21,7 @@ view:
 run: up
 
 build:
-	docker compose build
+	docker compose build --progress=plain --parallel
 
 up:
 	docker compose up -d
