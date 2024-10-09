@@ -4,10 +4,10 @@ FROM python:3.12-slim
 # Set the working directory in the container
 WORKDIR /app
 
-# Update GPG keys and install git
+# Update GPG keys and install git and gcc
 RUN apt-get update && apt-get install -y gnupg2
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git gcc g++
 
 # Copy the current directory contents into the container at /app
 COPY . /app
@@ -20,4 +20,4 @@ RUN pip install -r requirements.txt
 EXPOSE 80
 
 # Run app.py when the container launches
-CMD ["python", "app.py"]
+CMD ["python", "simple.py"]

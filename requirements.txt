@@ -1,7 +1,8 @@
 --extra-index-url https://download.pytorch.org/whl/cu118
-torch
-torchvision
-torchaudio
+torch==2.4.0
+torchvision==0.19.1
+torchaudio==2.4.0
+biotite==1.0.1
 # esm
 # Uncomment the following line to use the ESM with fix for Mac Silicon
 git+https://github.com/imranq2/esm.git@fix-for-mac-silicon#egg=esm
