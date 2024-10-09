@@ -8,12 +8,13 @@ import torch
 token = os.getenv("HF_API_TOKEN")
 
 if token:
-    # Use the existing token
-    print("Using existing Hugging Face token.")
-    print(f"token: {token}")
-    # Use your Hugging Face token here
-    login(token="your_huggingface_token", add_to_git_credential=True)
-    api = HfApi(token=token)
+    # Attempt login
+    try:
+        login(token=token, add_to_git_credential=True)
+        print("Login successful!")
+    except ValueError as e:
+        print(f"Login failed: {e}")
+    api = HfApi()
 else:
     print("No token found so trying to login")
     # Prompt the user to log in if no token is found
