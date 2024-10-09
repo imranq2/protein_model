@@ -1,72 +1,65 @@
 import os
+from typing import Optional
+
 from huggingface_hub import login, HfApi
 from esm.models.esm3 import ESM3
-from esm.sdk.api import ESM3InferenceClient, ESMProtein, GenerationConfig
+from esm.sdk.api import ESMProtein, GenerationConfig, ProteinType
 import torch
+from torch.xpu import device
 
-# Check if the Hugging Face API token is available in the environment
-token = os.getenv("HF_API_TOKEN")
 
-if token:
-    # Attempt login
-    try:
-        login(token=token, add_to_git_credential=True)
-        print("Login successful!")
-    except ValueError as e:
-        print(f"Login failed: {e}")
-    api = HfApi()
-else:
-    print("No token found so trying to login")
-    # Prompt the user to log in if no token is found
-    login()
+class ProteinModel:
+    def __init__(self):
+        self.token: Optional[str] = os.getenv("HF_API_TOKEN")
+        self.device:  str | device | int = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+        self.model: ESM3 = self._load_model()
 
-# Check that MPS is available
-if not torch.backends.mps.is_available():
-    if not torch.backends.mps.is_built():
-        print("MPS not available because the current PyTorch install was not "
-              "built with MPS enabled.")
-    else:
-        print("MPS not available because the current MacOS version is not 12.3+ "
-              "and/or you do not have an MPS-enabled device on this machine.")
+    def _load_model(self) -> ESM3:
+        assert self.token, "HF_API_TOKEN environment variable is not set"
+        try:
+            login(token=self.token, add_to_git_credential=True)
+            print("Login successful!")
+        except ValueError as e:
+            print(f"Login failed: {e}")
+        api = HfApi()
 
-# Set the device to MPS (for Mac M1/M2) or CPU
-device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-# device = "cpu"
-print(f"device: {device}")
+        if not torch.backends.mps.is_available():
+            if not torch.backends.mps.is_built():
+                print("MPS not available because the current PyTorch install was not built with MPS enabled.")
+            else:
+                print("MPS not available because the current MacOS version is not 12.3+ and/or you do not have an MPS-enabled device on this machine.")
 
-# Load the ESM 3.0.4 model
-model: ESM3InferenceClient = ESM3.from_pretrained("esm3_sm_open_v1").to(device)
+        model: ESM3 = ESM3.from_pretrained("esm3_sm_open_v1").to(self.device)
+        print(f"Model is running on device: {next(model.parameters()).device}")
+        return model
 
-# Check if the model is on MPS
-model_device = next(model.parameters()).device
-print(f"Model is running on device: {model_device}")
+    def predict_sequence(self, sequence: str) -> Optional[str]:
+        protein: ProteinType = ESMProtein(sequence=sequence)
+        protein = self.model.generate(protein, GenerationConfig(track="sequence", num_steps=8, temperature=0.7))
 
-# Example protein sequence
-# sequence = "MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAN___"
-# sequence = "___________________________________________________DQATSLRILNNGHAFGSLTTPP___________________________________________________________"
-sequence = "___DQA___"
+        # Generate the secondary structure prediction
+        protein = self.model.generate(protein, GenerationConfig(track="structure", num_steps=8))
 
-# Create an ESMProtein object with the sequence
-protein = ESMProtein(sequence=sequence)
+        # Save the predicted structure to a PDB file
+        # noinspection PyUnresolvedReferences
+        protein.to_pdb("/data/predicted_structure.pdb")
 
-# Generate the sequence prediction (optional, if needed)
-protein = model.generate(protein, GenerationConfig(track="sequence", num_steps=8, temperature=0.7))
-# Print out the predicted sequence
-predicted_sequence = protein.sequence
-print("Predicted Sequence:")
-print(predicted_sequence)
+        # Optionally, perform a round-trip design by inverse folding the sequence and recomputing the structure
+        protein.sequence = None
+        protein = self.model.generate(protein, GenerationConfig(track="sequence", num_steps=8))
+        protein.coordinates = None
+        protein = self.model.generate(protein, GenerationConfig(track="structure", num_steps=8))
+        # noinspection PyUnresolvedReferences
+        protein.to_pdb("/data/round_tripped_structure.pdb")
 
-# Generate the secondary structure prediction
-protein = model.generate(protein, GenerationConfig(track="structure", num_steps=8))
+        print("Secondary structure prediction complete. PDB files saved.")
 
-# Save the predicted structure to a PDB file
-protein.to_pdb("/data/predicted_structure.pdb")
+        return protein.sequence
 
-# Optionally, perform a round-trip design by inverse folding the sequence and recomputing the structure
-protein.sequence = None
-protein = model.generate(protein, GenerationConfig(track="sequence", num_steps=8))
-protein.coordinates = None
-protein = model.generate(protein, GenerationConfig(track="structure", num_steps=8))
-protein.to_pdb("/data/round_tripped_structure.pdb")
-
-print("Secondary structure prediction complete. PDB files saved.")
+# Example usage
+if __name__ == "__main__":
+    model1: ProteinModel = ProteinModel()
+    sequence1: str = "___DQA___"
+    predicted_sequence: Optional[str] = model1.predict_sequence(sequence=sequence1)
+    print("Predicted Sequence:")
+    print(predicted_sequence)

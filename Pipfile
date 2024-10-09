@@ -11,6 +11,7 @@ torchvision = "==0.19.1"
 torchaudio = "==2.4.1"
 biotite = "==0.41.2"
 esm = {url = "https://github.com/imranq2/esm/archive/refs/tags/3.0.4.tar.gz"}
+huggingface_hub = "==0.25.2"
 
 [dev-packages]
 
