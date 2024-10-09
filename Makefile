@@ -33,5 +33,9 @@ down:
 run:
 	docker compose run --rm --name protein_model app /bin/bash -c "python3 simple.py"
 
+.PHONY: login
+login:
+	docker compose run --rm --name protein_model app /bin/bash -c "python3 login.py"
+
 .PHONY:update
 update: down Pipfile.lock  ## Updates all the packages using Pipfile

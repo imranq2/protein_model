@@ -27,6 +27,8 @@ COPY protein_model /app/protein_model
 
 WORKDIR /app/protein_model
 
+RUN git config --global credential.helper store
+
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
