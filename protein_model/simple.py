@@ -5,7 +5,7 @@ from esm.sdk.api import ESM3InferenceClient, ESMProtein, GenerationConfig
 import torch
 
 # Check if the Hugging Face API token is available in the environment
-token = os.getenv("HF_API_TOKEN")
+token = os.getenv("HUGGINGFACE_TOKEN")
 
 if token:
     # Use the existing token

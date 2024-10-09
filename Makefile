@@ -1,9 +1,4 @@
 # Makefile
-
-# Variables
-DOCKER_COMPOSE = docker compose
-SERVICE_NAME = app
-
 # Targets
 .PHONY: setup view run build up down logs
 
@@ -33,6 +28,10 @@ up:
 
 down:
 	docker compose down
+
+.PHONY: run
+run:
+	docker compose run --rm --name protein_model app python3 simple.py
 
 .PHONY:update
 update: down Pipfile.lock  ## Updates all the packages using Pipfile
