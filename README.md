@@ -1,11 +1,12 @@
 # protein_model
 
-# Setup
+## Setup
 1. Create a hugging face account at https://huggingface.co/
 2. Get an access token from https://huggingface.co/settings/tokens
 3. Give permission at https://huggingface.co/EvolutionaryScale/esm3-sm-open-v1
-4. 
-
+4. Build the Docker image:
+   ```sh
+   make setup
 
 # To view the output
 Install pymol:
