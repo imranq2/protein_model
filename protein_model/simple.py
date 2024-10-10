@@ -60,7 +60,7 @@ class ProteinModel:
 if __name__ == "__main__":
     import sys
     token = sys.argv[1] if len(sys.argv) > 1 else None
-    print(f"Token: {token}")
+    print(f"Token Passed in Command Line: {token}")
     model1: ProteinModel = ProteinModel(token=token)
     sequence1: str = "___DQA___"
     predicted_sequence: Optional[str] = model1.predict_sequence(sequence=sequence1)

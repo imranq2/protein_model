@@ -36,7 +36,7 @@ ENV HF_HOME="/models"
 RUN mkdir -p $HF_HOME
 
 # run it once to download all the models
-RUN python3 simple.py $HF_API_TOKEN
+# RUN python3 simple.py $HF_API_TOKEN
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
