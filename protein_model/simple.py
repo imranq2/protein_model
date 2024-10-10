@@ -9,9 +9,9 @@ from torch.xpu import device
 
 
 class ProteinModel:
-    def __init__(self):
-        self.token: Optional[str] = os.getenv("HF_API_TOKEN")
-        self.device:  str | device | int = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    def __init__(self, token: Optional[str] = None):
+        self.token: Optional[str] = token or os.getenv("HF_API_TOKEN")
+        self.device: str | device | int = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
         self.model: ESM3 = self._load_model()
 
     def _load_model(self) -> ESM3:
@@ -58,7 +58,10 @@ class ProteinModel:
 
 # Example usage
 if __name__ == "__main__":
-    model1: ProteinModel = ProteinModel()
+    import sys
+    token = sys.argv[1] if len(sys.argv) > 1 else None
+    print(f"Token: {token}")
+    model1: ProteinModel = ProteinModel(token=token)
     sequence1: str = "___DQA___"
     predicted_sequence: Optional[str] = model1.predict_sequence(sequence=sequence1)
     print("Predicted Sequence:")

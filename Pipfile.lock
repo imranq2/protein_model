@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9dbca897d0d0f00f6ab6af7c899b1e6154fab4aea7a1b0745b830589f1ea0cae"
+            "sha256": "9770f64929a48cd40b344424f783c71d57b32ec02da8b5b2270dbf838ee14853"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1281,9 +1281,28 @@
         },
         "torch": {
             "hashes": [
-                "sha256:18835374f599207a9e82c262153c20ddf42ea49bc76b6eadad8e5f49729f6e4d"
+                "sha256:092e7c2280c860eff762ac08c4bdcd53d701677851670695e0c22d6d345b269c",
+                "sha256:0b5f88afdfa05a335d80351e3cea57d38e578c8689f751d35e0ff36bce872113",
+                "sha256:18835374f599207a9e82c262153c20ddf42ea49bc76b6eadad8e5f49729f6e4d",
+                "sha256:362f82e23a4cd46341daabb76fba08f04cd646df9bfaf5da50af97cb60ca4971",
+                "sha256:40f6d3fe3bae74efcf08cb7f8295eaddd8a838ce89e9d26929d4edd6d5e4329d",
+                "sha256:5fc1d4d7ed265ef853579caf272686d1ed87cebdcd04f2a498f800ffc53dab71",
+                "sha256:6bce130f2cd2d52ba4e2c6ada461808de7e5eccbac692525337cfb4c19421846",
+                "sha256:72b484d5b6cec1a735bf3fa5a1c4883d01748698c5e9cfdbeb4ffab7c7987e0d",
+                "sha256:91e326e2ccfb1496e3bee58f70ef605aeb27bd26be07ba64f37dcaac3d070ada",
+                "sha256:a38de2803ee6050309aac032676536c3d3b6a9804248537e38e098d0e14817ec",
+                "sha256:b57f07e92858db78c5b72857b4f0b33a65b00dc5d68e7948a8494b0314efb880",
+                "sha256:c9299c16c9743001ecef515536ac45900247f4338ecdf70746f2461f9e4831db",
+                "sha256:c99e1db4bf0c5347107845d715b4aa1097e601bdc36343d758963055e9599d93",
+                "sha256:d36a8ef100f5bff3e9c3cea934b9e0d7ea277cb8210c7152d34a9a6c5830eadd",
+                "sha256:ddddbd8b066e743934a4200b3d54267a46db02106876d21cf31f7da7a96f98ea",
+                "sha256:e8ac1985c3ff0f60d85b991954cfc2cc25f79c84545aead422763148ed2759e3",
+                "sha256:ebea70ff30544fc021d441ce6b219a88b67524f01170b1c538d7d3ebb5e7f56c",
+                "sha256:ef503165f2341942bfdf2bd520152f19540d0c0e34961232f134dc59ad435be8",
+                "sha256:f18197f3f7c15cde2115892b64f17c80dbf01ed72b008020e7da339902742cf6",
+                "sha256:fdc4fe11db3eb93c1115d3e973a27ac7c1a8318af8934ffa36b0370efe28e042"
             ],
-            "index": "https://download.pytorch.org/whl/cu118",
+            "index": "pypi",
             "markers": "python_full_version >= '3.8.0'",
             "version": "==2.4.1"
         },

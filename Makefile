@@ -21,7 +21,8 @@ view:
 run: up
 
 build:
-	docker compose build --progress=plain --parallel
+	set -a; source docker.env; set +a; \
+	docker compose build --progress=plain --parallel --build-arg HF_API_TOKEN=$${HF_API_TOKEN}
 
 up:
 	docker compose up -d

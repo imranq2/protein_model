@@ -12,3 +12,4 @@ services:
     volumes:
       - .:/app
       - ./data:/data
+      - ./models:/models
