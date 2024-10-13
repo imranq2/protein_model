@@ -30,6 +30,10 @@ up:
 down:
 	docker compose down
 
+.PHONY: shell
+shell:
+	docker compose run -it --rm --name protein_model app /bin/bash
+
 .PHONY: run
 run:
 	docker compose run --rm --name protein_model app /bin/bash -c "python3 simple.py"
