@@ -40,3 +40,10 @@ login:
 
 .PHONY:update
 update: down Pipfile.lock  ## Updates all the packages using Pipfile
+
+.PHONY:download
+download:
+	set -a; source docker.env; set +a; \
+	echo $${HF_API_TOKEN} && \
+	docker build -t download-esm -f download.Dockerfile . && \
+	docker run --rm -e HF_API_TOKEN=$${HF_API_TOKEN}  -v ./models:/model download-esm

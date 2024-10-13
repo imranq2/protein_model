@@ -32,6 +32,7 @@ RUN git config --global credential.helper store
 ARG HF_API_TOKEN=""
 
 # store hugging face models in /models
+# https://huggingface.co/docs/huggingface_hub/en/package_reference/environment_variables
 ENV HF_HOME="/models"
 RUN mkdir -p $HF_HOME
 

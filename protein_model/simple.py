@@ -21,7 +21,7 @@ class ProteinModel:
             print("Login successful!")
         except ValueError as e:
             print(f"Login failed: {e}")
-        api = HfApi()
+        # api = HfApi()
 
         if not torch.backends.mps.is_available():
             if not torch.backends.mps.is_built():
@@ -59,9 +59,9 @@ class ProteinModel:
 # Example usage
 if __name__ == "__main__":
     import sys
-    token = sys.argv[1] if len(sys.argv) > 1 else None
-    print(f"Token Passed in Command Line: {token}")
-    model1: ProteinModel = ProteinModel(token=token)
+    token1 = sys.argv[1] if len(sys.argv) > 1 else None
+    print(f"Token Passed in Command Line: {token1}")
+    model1: ProteinModel = ProteinModel(token=token1)
     sequence1: str = "___DQA___"
     predicted_sequence: Optional[str] = model1.predict_sequence(sequence=sequence1)
     print("Predicted Sequence:")
